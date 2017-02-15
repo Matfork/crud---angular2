@@ -1,0 +1,18 @@
+<div class="jumbotron text-center">
+  <h1>Authors</h1>
+
+  <a routerLink="/author/create" class="btn btn-sm btn-info">Create Author</a>
+</div>
+
+<div class="user-list row" *ngIf="authors">
+
+  <div class="col-sm-4" *ngFor="let author of authors">
+
+    <div class="user-card text-center" [routerLink]="['/author', author.id]">
+      <h2>{{ author.first_name }} <small>{{ author.last_name }}</small></h2>
+      <h2>{{ author.age }}</h2>
+    </div>
+
+  </div>
+
+</div>
