@@ -1,25 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorService } from '../shared/services/author.service';
+import { BookService } from '../shared/services/book.service';
 
 @Component({
-  selector: 'author',
+  selector: 'book',
   templateUrl: './partials/main.html'
 })
-export class AuthorComponent implements OnInit {
+export class BookComponent implements OnInit {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private service: AuthorService) {}
+  constructor(private service: BookService) {}
 
   ngOnInit() {
     // author has been created
-    this.service.authorCreated$.subscribe(author => {
-      this.successMessage = `${author.first_name} ${author.last_name} has been created!`;
+    this.service.bookCreated$.subscribe(book => {
+      console.log(book);
+      this.successMessage = `${book.name} has been created!`;
       this.clearMessages();
     });
 
     // author has been deleted
-    this.service.authorDeleted$.subscribe(() => {
+    this.service.bookDeleted$.subscribe(() => {
       this.successMessage = `The author has been deleted!`;
       this.clearMessages();
     });

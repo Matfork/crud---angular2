@@ -6,7 +6,7 @@ import { Book } from '../models/book';
 
 @Injectable()
 export class BookService {
-  private booksUrl: string = 'http://localhost:3002/book';  
+  private booksUrl: string = 'http://localhost:3002/book';
 
   // observable source
   private bookCreatedSource = new Subject<Book>();
@@ -19,17 +19,17 @@ export class BookService {
   constructor(private http: Http) {}
 
   /**
-   * Get all users
+   * Get all books
    */
   getBooks(): Observable<Book[]> {
     return this.http.get(this.booksUrl)
       .map(res => res.json().data)
-      .map(users => users.map(this.toBook))
+      .map(books => books.map(this.toBook))
       .catch(this.handleError);
   }
 
   /**
-   * Get a single user
+   * Get a single book
    */
   getBook(id: number): Observable<Book> {
     // attaching a token
@@ -45,26 +45,26 @@ export class BookService {
   }
 
   /**
-   * Create the user
+   * Create the book
    */
-  createBook(user: Book): Observable<Book> {
-    return this.http.post(this.booksUrl, user)
+  createBook(book: Book): Observable<Book> {
+    return this.http.post(this.booksUrl, book)
       .map(res => res.json())
-      .do(user => this.bookCreated(user))
+      .do(book => this.bookCreated(book.data))
       .catch(this.handleError);
   }
 
   /**
-   * Update the user
+   * Update the book
    */
-  updateBook(user: Book): Observable<Book> {
-    return this.http.put(`${this.booksUrl}/${user.id}`, user)
+  updateBook(book: Book): Observable<Book> {
+    return this.http.put(`${this.booksUrl}/${book.id}`, book)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   /**
-   * Delete the user
+   * Delete the book
    */
   deleteBook(id: number): Observable<any> {
     return this.http.delete(`${this.booksUrl}/${id}`)
@@ -73,14 +73,14 @@ export class BookService {
   }
 
   /**
-   * The user was created. Add this info to our stream
+   * The book was created. Add this info to our stream
    */
-  bookCreated(user: Book) {
-    this.bookCreatedSource.next(user);
+  bookCreated(book: Book) {
+    this.bookCreatedSource.next(book);
   }
 
   /**
-   * The user was deleted. Add this info to our stream
+   * The book was deleted. Add this info to our stream
    */
   bookDeleted() {
     this.bookDeletedSource.next();

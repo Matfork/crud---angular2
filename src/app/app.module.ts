@@ -10,6 +10,13 @@ import { AuthorEditComponent } from './author/author-edit.component';
 import { AuthorListComponent } from './author/author-list.component';
 import { AuthorCreateComponent } from './author/author-create.component';
 import { AuthorSingleComponent } from './author/author-single.component';
+
+import { BookComponent } from './book/book.component';
+import { BookEditComponent } from './book/edit.component';
+import { BookListComponent } from './book/list.component';
+import { BookCreateComponent } from './book/create.component';
+import { BookSingleComponent } from './book/single.component';
+
 import { LoginComponent } from './login/login.component';
 
 import { AuthorService } from './shared/services/author.service';
@@ -30,7 +37,12 @@ import 'rxjs/add/observable/throw';
     AuthorListComponent,
     AuthorCreateComponent,
     AuthorSingleComponent,
-    LoginComponent
+    LoginComponent,
+    BookComponent,
+    BookEditComponent,
+    BookListComponent,
+    BookCreateComponent,
+    BookSingleComponent
   ],
   imports: [
     BrowserModule,
@@ -45,4 +57,5 @@ import 'rxjs/add/observable/throw';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

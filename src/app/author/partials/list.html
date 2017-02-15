@@ -9,8 +9,7 @@
   <div class="col-sm-4" *ngFor="let author of authors">
 
     <div class="user-card text-center" [routerLink]="['/author', author.id]">
-      <h2>{{ author.first_name }} <small>{{ author.last_name }}</small></h2>
-      <h2>{{ author.age }}</h2>
+      <h2>{{ author.first_name }} <small>{{ author.last_name }}</small> {{ author.age }}</h2>
     </div>
 
   </div>

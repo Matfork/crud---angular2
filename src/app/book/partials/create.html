@@ -1,0 +1,32 @@
+<div *ngIf="book">
+
+  <form (ngSubmit)="createBook()">
+
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="book.name">
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" class="form-control" name="description" [(ngModel)]="book.description">
+    </div>
+
+    <div class="form-group">
+      <label>Publication Date</label>
+      <input type="text" class="form-control" name="publication_date" [(ngModel)]="book.publication_date">
+    </div>
+
+    <div class="form-group">
+      <label>Author Id</label>
+      <input type="text" class="form-control" name="author_id" [(ngModel)]="book.author_id">
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <button type="submit" class="btn btn-success">Create Book</button>
+
+  </form>
+
+</div>

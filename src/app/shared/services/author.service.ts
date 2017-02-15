@@ -20,7 +20,7 @@ export class AuthorService {
   constructor(private http: Http) {}
 
   /**
-   * Get all users
+   * Get all author
    */
   getAuthors(): Observable<Author[]> {
     return this.http.get(this.authorUrl)
@@ -30,7 +30,7 @@ export class AuthorService {
   }
 
   /**
-   * Get a single user
+   * Get a single author
    */
   getAuthor(id: number): Observable<Author> {
     // attaching a token
@@ -46,17 +46,17 @@ export class AuthorService {
   }
 
   /**
-   * Create the user
+   * Create the author
    */
   createAuthor(author: Author): Observable<Author> {
     return this.http.post(this.authorUrl, author)
       .map(res => res.json())
-      .do(author => this.authorCreated(author))
+      .do(author => this.authorCreated(author.data))
       .catch(this.handleError);
   }
 
   /**
-   * Update the user
+   * Update the author
    */
   updateAuthor(author: Author): Observable<Author> {
     return this.http.put(`${this.authorUrl}/${author.id}`, author)
@@ -65,7 +65,7 @@ export class AuthorService {
   }
 
   /**
-   * Delete the user
+   * Delete the author
    */
   deleteAuthor(id: number): Observable<any> {
     return this.http.delete(`${this.authorUrl}/${id}`)
@@ -74,14 +74,14 @@ export class AuthorService {
   }
 
   /**
-   * The user was created. Add this info to our stream
+   * The author was created. Add this info to our stream
    */
   authorCreated(author: Author) {
     this.authorCreatedSource.next(author);
   }
 
   /**
-   * The user was deleted. Add this info to our stream
+   * The author was deleted. Add this info to our stream
    */
   authorDeleted() {
     this.authorDeletedSource.next();

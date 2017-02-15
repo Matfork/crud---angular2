@@ -19,7 +19,7 @@ export class AuthorCreateComponent implements OnInit {
   /**
    * Create a Author
    */
-  createUser() {
+  createAuthor() {    
     this.successMessage = '';
     this.errorMessage   = '';
 
@@ -27,7 +27,6 @@ export class AuthorCreateComponent implements OnInit {
       .subscribe(author => {
         this.successMessage = 'Author was created!';
         console.log('Author was created');
-
         // navigate back to the users page
         this.router.navigate(['/author']);
       })

@@ -1,0 +1,17 @@
+<div class="jumbotron text-center">
+  <h1>Books</h1>
+
+  <a routerLink="/book/create" class="btn btn-sm btn-info">Create Book</a>
+</div>
+
+<div class="user-list row" *ngIf="books">
+
+  <div class="col-sm-4" *ngFor="let book of books">
+
+    <div class="user-card text-center" [routerLink]="['/book', book.id]">
+      <h2>{{ book.name }} <small>{{ book.description }}</small> {{ book.publication_date }} {{ book.author_id }}</h2>
+    </div>
+
+  </div>
+
+</div>

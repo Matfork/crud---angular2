@@ -1,9 +1,8 @@
-<div *ngIf="user">
+<div *ngIf="author">
 
   <a [routerLink]="['/author', author.id, 'edit']" class="btn btn-primary btn-sm">Edit</a>
   <a (click)="deleteAuthor()" class="btn btn-danger btn-sm">Delete</a>
 
-  <h2>{{ author.name }} <small>{{ author.username }}</small></h2>
-  <img [src]="user.avatar" class="img-rounded">
+  <h2>{{ author.first_name }} <small>{{ author.last_name }}</small> {{ author.age }}</h2>
 
 </div>

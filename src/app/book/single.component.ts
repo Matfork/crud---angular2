@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Author } from '../shared/models/author';
-import { AuthorService } from '../shared/services/author.service';
+import { Book } from '../shared/models/book';
+import { BookService } from '../shared/services/book.service';
 
 @Component({
   templateUrl: './partials/single.html'
 })
-export class AuthorSingleComponent implements OnInit {
-  author: Author;
+export class BookSingleComponent implements OnInit {
+  book: Book;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: AuthorService
+    private service: BookService
   ) {}
 
   ngOnInit() {
@@ -20,20 +20,20 @@ export class AuthorSingleComponent implements OnInit {
     let id = this.route.snapshot.params['id'];
 
     // use the userservice to getUser()
-    this.service.getAuthor(id)
-      .subscribe(author => {
-        this.author = author});
+    this.service.getBook(id)
+      .subscribe(book => {
+        this.book = book});
   }
 
   /**
    * Delete a user
    */
   deleteAuthor() {
-    this.service.deleteAuthor(this.author.id)
+    this.service.deleteBook(this.book.id)
       .subscribe(data => {
         console.log('user was deleted');
         // route back to the users page
-        this.router.navigate(['/author']);
+        this.router.navigate(['/book']);
       });
   }
 
