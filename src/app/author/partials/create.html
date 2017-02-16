@@ -2,25 +2,32 @@
 
   <form (ngSubmit)="createAuthor()">
 
-    <div class="form-group">
-      <label>First Name</label>
-      <input type="text" class="form-control" name="first_name" [(ngModel)]="author.first_name">
-    </div>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield">
+           <label class="mdl-textfield__label" for="first_name">Fist Name</label>
+           <input type="text" class="mdl-textfield__input"  name="first_name" id="first_name" [(ngModel)]="author.first_name">
+         </div>
+      </div>
 
-    <div class="form-group">
-      <label>Last Name</label>
-      <input type="text" class="form-control" name="last_name" [(ngModel)]="author.last_name">
-    </div>
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input type="text" class="mdl-textfield__input" name="last_name" id="last_name" [(ngModel)]="author.last_name">
+         <label class="mdl-textfield__label" for="last_name">Last Name</label>
+        </div>
+      </div>
 
-    <div class="form-group">
-      <label>Age</label>
-      <input type="text" class="form-control" name="age" [(ngModel)]="author.age">
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input type="text" class="mdl-textfield__input" id="age" name="age" [(ngModel)]="author.age">
+         <label class="mdl-textfield__label" for="age">Age</label>
+       </div>
+      </div>
     </div>
 
     <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
     <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-
-    <button type="submit" class="btn btn-success">Create Author</button>
+    <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised">Create</button>
 
   </form>
 

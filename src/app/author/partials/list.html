@@ -1,17 +1,32 @@
 <div class="jumbotron text-center">
-  <h1>Authors</h1>
+  <h2>Authors</h2>
 
-  <a routerLink="/author/create" class="btn btn-sm btn-info">Create Author</a>
+  <a routerLink="/author/create" class="mdl-button mdl-js-button mdl-button--raised">New Author</a>
 </div>
 
 <div class="user-list row" *ngIf="authors">
 
-  <div class="col-sm-4" *ngFor="let author of authors">
-
-    <div class="user-card text-center" [routerLink]="['/author', author.id]">
-      <h2>{{ author.first_name }} <small>{{ author.last_name }}</small> {{ author.age }}</h2>
-    </div>
-
-  </div>
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" style='width:100%'>
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">ID</th>
+        <th class="mdl-data-table__cell--non-numeric">FIRST NAME</th>
+        <th class="mdl-data-table__cell--non-numeric">LAST NAME</th>
+        <th class="mdl-data-table__cell--non-numeric">AGE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let author of authors">
+        <td class="mdl-data-table__cell--non-numeric">
+          <a [routerLink]="['/author', author.id]">
+            {{ author.id }}
+          </a>
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">{{ author.first_name }} </td>
+        <td class="mdl-data-table__cell--non-numeric">{{ author.last_name }}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{ author.age }}</td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>

@@ -96,7 +96,7 @@ export class BookService {
       description: `${book.description}`,
       publication_date: book.publication_date,
       author_id: book.author_id,
-      author : {}
+      author : book.Author
     };
   }
 

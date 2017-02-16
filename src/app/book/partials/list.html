@@ -1,17 +1,38 @@
 <div class="jumbotron text-center">
   <h1>Books</h1>
 
-  <a routerLink="/book/create" class="btn btn-sm btn-info">Create Book</a>
+  <a routerLink="/book/create" class="mdl-button mdl-js-button mdl-button--raised">Create Book</a>
 </div>
 
 <div class="user-list row" *ngIf="books">
 
-  <div class="col-sm-4" *ngFor="let book of books">
-
-    <div class="user-card text-center" [routerLink]="['/book', book.id]">
-      <h2>{{ book.name }} <small>{{ book.description }}</small> {{ book.publication_date }} {{ book.author_id }}</h2>
-    </div>
-
-  </div>
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" style='width:100%'>
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">ID</th>
+        <th class="mdl-data-table__cell--non-numeric">NAME</th>
+        <th class="mdl-data-table__cell--non-numeric">DESCRIPTION</th>
+        <th class="mdl-data-table__cell--non-numeric">PUBLICATION DATE</th>
+        <th class="mdl-data-table__cell--non-numeric">AUTHOR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td class="mdl-data-table__cell--non-numeric">
+          <a [routerLink]="['/book', book.id]">
+            {{ book.id }}
+          </a>
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">{{ book.name }} </td>
+        <td class="mdl-data-table__cell--non-numeric">{{ book.description }}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{ mj(book.publication_date).format('MM-DD-YYYY') }}</td>
+        <td class="mdl-data-table__cell--non-numeric" >
+          <a [routerLink]="['/author', book.author.id]">
+            {{ book.author.first_name.concat(' ',book.author.last_name) }}
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>

@@ -1,22 +1,27 @@
-<div class="container">
-
-  <div class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a routerLink="/" class="navbar-brand">My HTTP App</a>
-      </div>
-
-      <ul class="nav navbar-nav">
-        <li><a routerLink="/author">Authors</a></li>
-        <li><a routerLink="/book">Books</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
-        <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
-      </ul>
+<div mdl class="container mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Crud App</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      <a routerLink="/author" class="mdl-navigation__link">AUTHORS</a>
+      <a routerLink="/book" class="mdl-navigation__link">BOOKS</a>
+      </nav>
     </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Crud App</span>
+    <nav class="mdl-navigation">
+        <a routerLink="/author" class="mdl-navigation__link">AUTHORS</a>
+        <a routerLink="/book" class="mdl-navigation__link">BOOKS</a>
+    </nav>
   </div>
-
-  <router-outlet></router-outlet>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
 </div>

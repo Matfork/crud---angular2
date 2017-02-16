@@ -2,30 +2,41 @@
 
   <form (ngSubmit)="updateBook()">
 
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" class="form-control" name="name" [(ngModel)]="book.name">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield">
+           <label class="mdl-textfield__label" for="name">Name</label>
+           <input type="text" class="mdl-textfield__input"  name="name" id="name" [(ngModel)]="book.name">
+         </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input type="text" class="mdl-textfield__input" name="description" id="description" [(ngModel)]="book.description">
+         <label class="mdl-textfield__label" for="description">Description</label>
+        </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input type="text" class="mdl-textfield__input" id="publication_date" name="publication_date" [(ngModel)]="book.publication_date">
+         <label class="mdl-textfield__label" for="publication_date">Publication Date</label>
+       </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+           <input type="text" class="mdl-textfield__input" id="author_id" name="author_id" [(ngModel)]="book.author_id">
+           <label class="mdl-textfield__label" for="author_id">Author</label>
+         </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label>Description</label>
-      <input type="text" class="form-control" name="description" [(ngModel)]="book.description">
-    </div>
-
-    <div class="form-group">
-      <label>Publication Date</label>
-      <input type="text" class="form-control" name="publication_date" [(ngModel)]="book.publication_date">
-    </div>
-
-    <div class="form-group">
-      <label>Author Id</label>
-      <input type="text" class="form-control" name="author_id" [(ngModel)]="book.author_id">
-    </div>
 
     <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
     <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
-    <button type="submit" class="btn btn-success">Update Book</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">Update Book</button>
   </form>
 
 </div>

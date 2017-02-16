@@ -1,8 +1,36 @@
 <div *ngIf="book">
 
-  <a [routerLink]="['/book', book.id, 'edit']" class="btn btn-primary btn-sm">Edit</a>
-  <a (click)="deleteAuthor()" class="btn btn-danger btn-sm">Delete</a>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-textfield mdl-js-textfield">
+         <label class="mdl-textfield__label" for="name">Name</label>
+         <input type="text" class="mdl-textfield__input"  name="name" id="name" [(ngModel)]="book.name" readonly>
+       </div>
+    </div>
 
-  <h2>{{ book.name }} <small>{{ book.description }}</small> {{ book.plucation_date }} {{ book.author_id }}</h2>
+    <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+       <input type="text" class="mdl-textfield__input" name="description" id="description" [(ngModel)]="book.description" readonly>
+       <label class="mdl-textfield__label" for="description">Description</label>
+      </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+       <input type="text" class="mdl-textfield__input" id="publication_date" name="publication_date" [(ngModel)]="book.publication_date" readonly>
+       <label class="mdl-textfield__label" for="publication_date">Publication Date</label>
+     </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+         <input type="text" class="mdl-textfield__input" id="author_id" name="author_id" [(ngModel)]="book.author_id" readonly>
+         <label class="mdl-textfield__label" for="author_id">Author</label>
+       </div>
+    </div>
+  </div>
+
+  <a [routerLink]="['/book', book.id, 'edit']" class="mdl-button mdl-js-button mdl-button--raised">Edit</a>
+  <a (click)="deleteAuthor()" class="mdl-button mdl-js-button mdl-button--raised">Delete</a>
 
 </div>

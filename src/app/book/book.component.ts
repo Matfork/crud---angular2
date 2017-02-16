@@ -12,9 +12,9 @@ export class BookComponent implements OnInit {
   constructor(private service: BookService) {}
 
   ngOnInit() {
+
     // author has been created
     this.service.bookCreated$.subscribe(book => {
-      console.log(book);
       this.successMessage = `${book.name} has been created!`;
       this.clearMessages();
     });
