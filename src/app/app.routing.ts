@@ -13,13 +13,13 @@ import { BookSingleComponent } from './book/single.component';
 import { BookEditComponent } from './book/edit.component';
 import { BookCreateComponent } from './book/create.component';
 
-
 import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
+
   {
     path: '',
-    redirectTo: '/author',
+    redirectTo: '/',
     pathMatch: 'full'
   },
   {

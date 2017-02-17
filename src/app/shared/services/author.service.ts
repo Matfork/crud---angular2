@@ -6,8 +6,7 @@ import { Author } from '../models/author';
 
 @Injectable()
 export class AuthorService {
-  //private usersUrl: string = 'https://reqres.in/api/users';
-  private authorUrl: string = 'http://localhost:3002/author';
+  private authorUrl: string = 'http://localhost:3002/api/author';
 
   // observable source
   private authorCreatedSource = new Subject<Author>();

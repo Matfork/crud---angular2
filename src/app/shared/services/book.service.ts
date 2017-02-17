@@ -6,7 +6,7 @@ import { Book } from '../models/book';
 
 @Injectable()
 export class BookService {
-  private booksUrl: string = 'http://localhost:3002/book';
+  private booksUrl: string = 'http://localhost:3002/api/book';
 
   // observable source
   private bookCreatedSource = new Subject<Book>();
