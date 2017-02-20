@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
-  private authUrl: string = 'http://localhost:3002/api/auth/login';
+  private authUrl: string = 'http://localhost:3002/api/auth';
   private loggedIn: boolean = false;
 
   constructor(private http: Http) {
@@ -15,24 +17,49 @@ export class AuthService {
   /**
    * Check if the user is logged in
    */
-  isLoggedIn() {
+  isLoggedIn() :boolean {
     return this.loggedIn;
   }
 
   /**
    * Log the user in
    */
-  login(username: string, password: string): Observable<string> {
-    return this.http.post(`${this.authUrl}/login`, { username, password })
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.authUrl}/login`, { email: username, password })
       .map(res => res.json())
       .do(res => {
-        if (res.token) {
-          localStorage.setItem('auth_token', res.token);
+        if (res.code === 200) {
+          localStorage.setItem('auth_token', res.data);
           this.loggedIn = true;
         }
       })
       .catch(this.handleError);
   }
+
+  /**
+   * verifyToken the user in
+   */
+  verifyToken(cas : string): any {
+
+    let headers = new Headers();
+    let token   = localStorage.getItem('auth_token');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `Bearer ${token}`);
+    headers.append('verifyonly', '1');
+
+    let obs = this.http.post(`${this.authUrl}/verify`,{}, {headers});
+
+    if(cas){
+      obs.map(res => res.json())
+        .do(res => {
+          console.log('verification response', res);
+        })
+        .catch(this.handleError);
+    }
+
+    return obs;
+  }
+
 
   /**
    * Log the user out

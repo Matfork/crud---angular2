@@ -14,12 +14,14 @@ import { BookEditComponent } from './book/edit.component';
 import { BookCreateComponent } from './book/create.component';
 
 import { LoginComponent } from './login/login.component';
+import { AuthGuard }      from './shared/guards/auth-guard.service';
+
 
 export const routes: Routes = [
 
   {
     path: '',
-    redirectTo: '/',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -28,24 +30,32 @@ export const routes: Routes = [
   },
   {
     path: 'author',
+  //  canActivate: [AuthGuard],
     component: AuthorComponent,
     children: [
       {
         path: '',
-        component: AuthorListComponent
+        canActivateChild: [AuthGuard],
+        children: [
+          {
+            path: '',
+            component: AuthorListComponent
+          },
+          {
+            path: 'create',
+            component: AuthorCreateComponent
+          },
+          {
+            path: ':id',
+            component: AuthorSingleComponent
+          },
+          {
+            path: ':id/edit',
+            component: AuthorEditComponent
+          }
+        ]
       },
-      {
-        path: 'create',
-        component: AuthorCreateComponent
-      },
-      {
-        path: ':id',
-        component: AuthorSingleComponent
-      },
-      {
-        path: ':id/edit',
-        component: AuthorEditComponent
-      }
+
     ]
   },
   {
@@ -69,7 +79,8 @@ export const routes: Routes = [
         component: BookEditComponent
       }
     ]
-  }
+  },
+  //{ path: '**', component: PageNotFoundComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

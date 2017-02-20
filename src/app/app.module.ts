@@ -23,6 +23,8 @@ import { AuthorService } from './shared/services/author.service';
 import { BookService } from './shared/services/book.service';
 import { AuthService } from './shared/services/auth.service';
 
+import { AuthGuard } from './shared/guards/auth-guard.service';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
@@ -53,7 +55,8 @@ import 'rxjs/add/observable/throw';
   providers: [
     AuthService,
     AuthorService,
-    BookService
+    BookService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
