@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http} from '@angular/http';
 import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -17,6 +17,8 @@ import { BookListComponent } from './book/list.component';
 import { BookCreateComponent } from './book/create.component';
 import { BookSingleComponent } from './book/single.component';
 
+import { PageNotFoundComponent } from './utils/page-not-found.component';
+
 import { LoginComponent } from './login/login.component';
 
 import { AuthorService } from './shared/services/author.service';
@@ -24,6 +26,11 @@ import { BookService } from './shared/services/book.service';
 import { AuthService } from './shared/services/auth.service';
 
 import { AuthGuard } from './shared/guards/auth-guard.service';
+
+import { InterceptorService } from 'ng2-interceptors';
+import { XHRBackend, RequestOptions } from '@angular/http';
+import { interceptorFactory} from './shared/interceptor/interceptor.factory';
+import { ServerURLInterceptor} from './shared/interceptor/server-url.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -44,7 +51,8 @@ import 'rxjs/add/observable/throw';
     BookEditComponent,
     BookListComponent,
     BookCreateComponent,
-    BookSingleComponent
+    BookSingleComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +64,19 @@ import 'rxjs/add/observable/throw';
     AuthService,
     AuthorService,
     BookService,
-    AuthGuard
+    AuthGuard,
+    ServerURLInterceptor, // Add it here
+    {
+      provide: InterceptorService,
+      useFactory: interceptorFactory,
+      deps: [XHRBackend, RequestOptions, ServerURLInterceptor]
+    }
+    // To completely replace Http calls for our interceptor uncomment following part
+    // ,{
+    //   provide: Http,
+    //   useFactory: interceptorFactory,
+    //   deps: [XHRBackend, RequestOptions]
+    // }
   ],
   bootstrap: [AppComponent]
 })

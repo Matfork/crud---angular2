@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { InterceptorService } from 'ng2-interceptors';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Book } from '../models/book';
@@ -16,7 +17,7 @@ export class BookService {
   bookCreated$ = this.bookCreatedSource.asObservable();
   bookDeleted$ = this.bookDeletedSource.asObservable();
 
-  constructor(private http: Http) {}
+  constructor(private http: InterceptorService) {}
 
   /**
    * Get all books

@@ -9,23 +9,21 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router, private authService : AuthService ) {}
 
   canActivate() :any{
-
-    // logged in so return true
+  //  logged in so return true
     if(this.authService.isLoggedIn()) {
 
       return this.authService.verifyToken('guard')
         .map(res => {
             let dataJson = res.json();
 
-            // creds are still valid
+            //creds are still valid
             if(dataJson.code === 200){
-              console.log('still valid', dataJson);
+              //console.log('still valid', dataJson);
               return true;
             }
             return false;
         })
-        .catch(function(err)
-        {
+        .catch( err  => {
             let data = err.json() || '';
             // creds have expired
             if(data.code === 401){
@@ -35,7 +33,7 @@ export class AuthGuard implements CanActivate {
             }
 
             this.router.navigate(['/login'], { queryParams: { msg: 'Token Expired' } });
-            return false;
+            return [false];
         });
 
     }else{

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { InterceptorService } from 'ng2-interceptors';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
@@ -9,7 +10,7 @@ export class AuthService {
   private authUrl: string = 'http://localhost:3002/api/auth';
   private loggedIn: boolean = false;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private httpInterceptor: InterceptorService) {
     // look at localStorage to check if the user is logged in
     this.loggedIn = !!localStorage.getItem('auth_token');
   }
@@ -25,7 +26,8 @@ export class AuthService {
    * Log the user in
    */
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.authUrl}/login`, { email: username, password })
+
+    return this.httpInterceptor.post(`${this.authUrl}/login`, { email: username, password })
       .map(res => res.json())
       .do(res => {
         if (res.code === 200) {
@@ -37,23 +39,17 @@ export class AuthService {
   }
 
   /**
-   * verifyToken the user in
+   * verifyToken the user token
    */
   verifyToken(cas : string): any {
-
     let headers = new Headers();
-    let token   = localStorage.getItem('auth_token');
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', `Bearer ${token}`);
     headers.append('verifyonly', '1');
 
-    let obs = this.http.post(`${this.authUrl}/verify`,{}, {headers});
+    let obs = this.httpInterceptor.post(`${this.authUrl}/verify`,{},{headers: headers});
 
     if(cas){
       obs.map(res => res.json())
-        .do(res => {
-          console.log('verification response', res);
-        })
+        .do(res => {console.log('verification response', res);})
         .catch(this.handleError);
     }
 

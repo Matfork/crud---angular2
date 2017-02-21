@@ -13,6 +13,7 @@ import { BookSingleComponent } from './book/single.component';
 import { BookEditComponent } from './book/edit.component';
 import { BookCreateComponent } from './book/create.component';
 
+import { PageNotFoundComponent } from './utils/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard }      from './shared/guards/auth-guard.service';
 
@@ -64,23 +65,29 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: BookListComponent
-      },
-      {
-        path: 'create',
-        component: BookCreateComponent
-      },
-      {
-        path: ':id',
-        component: BookSingleComponent
-      },
-      {
-        path: ':id/edit',
-        component: BookEditComponent
+        canActivateChild: [AuthGuard],
+        children: [
+          {
+            path: '',
+            component: BookListComponent
+          },
+          {
+            path: 'create',
+            component: BookCreateComponent
+          },
+          {
+            path: ':id',
+            component: BookSingleComponent
+          },
+          {
+            path: ':id/edit',
+            component: BookEditComponent
+          }
+        ]
       }
     ]
   },
-  //{ path: '**', component: PageNotFoundComponent }
+  { path: 'aa', component: PageNotFoundComponent }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

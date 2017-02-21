@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Response, Headers } from '@angular/http';
+import { InterceptorService } from 'ng2-interceptors';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Author } from '../models/author';
@@ -16,7 +17,7 @@ export class AuthorService {
   authorCreated$ = this.authorCreatedSource.asObservable();
   authorDeleted$ = this.authorDeletedSource.asObservable();
 
-  constructor(private http: Http) {}
+  constructor(private http: InterceptorService) {}
 
   /**
    * Get all author
