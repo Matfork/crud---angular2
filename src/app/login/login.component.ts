@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
 
@@ -23,8 +23,9 @@ export class LoginComponent implements OnInit {
     this.service.login(this.credentials.username, this.credentials.password)
       .subscribe(
         data => {
-          this.router.navigate(['']);
-          console.log(data);
+          if(data.code === 200){
+            this.router.navigate(['/author']);
+          }
         },
         err => {
           this.errorMessage = err;

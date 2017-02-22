@@ -19,7 +19,7 @@ export class AuthorCreateComponent implements OnInit {
   /**
    * Create a Author
    */
-  createAuthor() {    
+  createAuthor() {
     this.successMessage = '';
     this.errorMessage   = '';
 
