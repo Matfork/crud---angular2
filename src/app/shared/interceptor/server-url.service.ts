@@ -9,6 +9,7 @@ export class ServerURLInterceptor implements Interceptor {
 
         let headers = request.options.headers;
         let token   = localStorage.getItem('auth_token');
+        //headers.set('Content-Type', 'application/x-www-form-urlencoded');
         headers.set('Content-Type', 'application/json');
         headers.set('Authorization', `Bearer ${token}`);
 

@@ -5,17 +5,20 @@ import { HttpModule, Http} from '@angular/http';
 import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { AuthorComponent } from './author/author.component';
-import { AuthorEditComponent } from './author/author-edit.component';
-import { AuthorListComponent } from './author/author-list.component';
-import { AuthorCreateComponent } from './author/author-create.component';
-import { AuthorSingleComponent } from './author/author-single.component';
 
-import { BookComponent } from './book/book.component';
-import { BookEditComponent } from './book/edit.component';
-import { BookListComponent } from './book/list.component';
-import { BookCreateComponent } from './book/create.component';
-import { BookSingleComponent } from './book/single.component';
+// import { AuthorComponent } from './author/author.component';
+// import { AuthorEditComponent } from './author/author-edit.component';
+// import { AuthorListComponent } from './author/author-list.component';
+// import { AuthorCreateComponent } from './author/author-create.component';
+// import { AuthorSingleComponent } from './author/author-single.component';
+import { AuthorModule } from './author/author.module';
+
+// import { BookComponent } from './book/book.component';
+// import { BookEditComponent } from './book/edit.component';
+// import { BookListComponent } from './book/list.component';
+// import { BookCreateComponent } from './book/create.component';
+// import { BookSingleComponent } from './book/single.component';
+import { BookModule } from './book/book.module';
 
 import { PageNotFoundComponent } from './utils/page-not-found.component';
 
@@ -41,20 +44,17 @@ import 'rxjs/add/observable/throw';
 @NgModule({
   declarations: [
     AppComponent,
-    AuthorComponent,
-    AuthorEditComponent,
-    AuthorListComponent,
-    AuthorCreateComponent,
-    AuthorSingleComponent,
+    // AuthorComponent,
+    // AuthorEditComponent,
+    // AuthorListComponent,
+    // AuthorCreateComponent,
+    // AuthorSingleComponent,
     LoginComponent,
-    BookComponent,
-    BookEditComponent,
-    BookListComponent,
-    BookCreateComponent,
-    BookSingleComponent,
     PageNotFoundComponent
   ],
   imports: [
+    AuthorModule,
+    BookModule,
     BrowserModule,
     FormsModule,
     HttpModule,
@@ -62,8 +62,7 @@ import 'rxjs/add/observable/throw';
   ],
   providers: [
     AuthService,
-    AuthorService,
-    BookService,
+    // AuthorService,    
     AuthGuard,
     ServerURLInterceptor, // Add it here
     {
