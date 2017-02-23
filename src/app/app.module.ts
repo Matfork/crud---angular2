@@ -12,12 +12,6 @@ import { AppComponent } from './app.component';
 // import { AuthorCreateComponent } from './author/author-create.component';
 // import { AuthorSingleComponent } from './author/author-single.component';
 import { AuthorModule } from './author/author.module';
-
-// import { BookComponent } from './book/book.component';
-// import { BookEditComponent } from './book/edit.component';
-// import { BookListComponent } from './book/list.component';
-// import { BookCreateComponent } from './book/create.component';
-// import { BookSingleComponent } from './book/single.component';
 import { BookModule } from './book/book.module';
 
 import { PageNotFoundComponent } from './utils/page-not-found.component';
@@ -35,6 +29,8 @@ import { XHRBackend, RequestOptions } from '@angular/http';
 import { interceptorFactory} from './shared/interceptor/interceptor.factory';
 import { ServerURLInterceptor} from './shared/interceptor/server-url.service';
 
+import { HeaderComponent } from './shared/core/header/header.component';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
@@ -50,7 +46,8 @@ import 'rxjs/add/observable/throw';
     // AuthorCreateComponent,
     // AuthorSingleComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HeaderComponent
   ],
   imports: [
     AuthorModule,
@@ -62,7 +59,7 @@ import 'rxjs/add/observable/throw';
   ],
   providers: [
     AuthService,
-    // AuthorService,    
+    // AuthorService,
     AuthGuard,
     ServerURLInterceptor, // Add it here
     {

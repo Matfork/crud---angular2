@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd} from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
+import { Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,37 @@ import { AuthService } from './shared/services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // users: User[];
+
+  private hideHeader;
 
   constructor(
-    // private userService: UserService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private location : Location
   ) {}
 
-  ngOnInit() {
+  private ngOnInit() {
+    this.displayLogic();
+  }
+
+  private displayLogic(){
+    this.router.events.subscribe(
+      event => {
+        if(event instanceof NavigationEnd) {
+          //this is the same as line 37, but with router.event instead
+          //  if(!!event.url.startsWith('/login')
+          //  || !!event.urlAfterRedirects.startsWith('/login')){
+          //    this.hideHeader= true;
+          //  }else{
+          //    this.hideHeader= false;
+          //  }
+
+          this.hideHeader = (!!location.pathname.startsWith('/login'));
+
+          //we could also use login to verify user authentication here, but we  are using guards instead.
+       }
+    });
+
   }
 
   /**
@@ -29,7 +52,7 @@ export class AppComponent {
   /**
    * Log the user out
    */
-  logout() {
+  public logout(params) {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
