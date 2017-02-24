@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd} from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 import { Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { VERSION } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,9 @@ export class AppComponent {
     private authService: AuthService,
     private router: Router,
     private location : Location
-  ) {}
+  ) {
+     console.log(VERSION.full);
+  }
 
   private ngOnInit() {
     this.displayLogic();

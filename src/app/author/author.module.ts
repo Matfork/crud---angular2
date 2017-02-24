@@ -1,6 +1,6 @@
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthorRoutingModule } from './author-routing.module';
 import { AuthorComponent } from './author.component';
@@ -15,6 +15,7 @@ import { AuthorService } from '../shared/services/author.service';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AuthorRoutingModule
   ],
   declarations: [

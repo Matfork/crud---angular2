@@ -15,7 +15,6 @@ import { AuthorModule } from './author/author.module';
 import { BookModule } from './book/book.module';
 
 import { PageNotFoundComponent } from './utils/page-not-found.component';
-
 import { LoginComponent } from './login/login.component';
 
 import { AuthorService } from './shared/services/author.service';
@@ -49,12 +48,15 @@ import 'rxjs/add/observable/throw';
     PageNotFoundComponent,
     HeaderComponent
   ],
+  exports: [
+    FormsModule
+  ],
   imports: [
+    FormsModule,
+    HttpModule,
     AuthorModule,
     BookModule,
     BrowserModule,
-    FormsModule,
-    HttpModule,
     routing
   ],
   providers: [

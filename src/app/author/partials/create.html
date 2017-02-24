@@ -1,28 +1,53 @@
-<div *ngIf="author">
+<!-- <div *ngIf="author"> -->
 
-  <form (ngSubmit)="createAuthor()">
+  <form (ngSubmit)="createAuthor(newAuthorForm.value, newAuthorForm.valid)" [formGroup]="newAuthorForm" novalidate >
 
-    <div class="mdl-grid">
+    <div class="mdl-grid" >
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield">
            <label class="mdl-textfield__label" for="first_name">Fist Name</label>
-           <input type="text" class="mdl-textfield__input"  name="first_name" id="first_name" [(ngModel)]="author.first_name">
+           <input type="text" class="mdl-textfield__input"  name="first_name" id="first_name"
+             formControlName="firstName"
+           >
+           <small [hidden]="newAuthorForm.controls.firstName.valid
+                           || (newAuthorForm.controls.firstName && !submitted)" class="text-danger">
+             First Name is required (minimum 5 characters).
+           </small>
          </div>
       </div>
 
-      <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-cell mdl-cell--12-col" >
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-         <input type="text" class="mdl-textfield__input" name="last_name" id="last_name" [(ngModel)]="author.last_name">
          <label class="mdl-textfield__label" for="last_name">Last Name</label>
+         <input type="text" class="mdl-textfield__input" name="last_name" id="last_name"
+           formControlName="lastName"
+         >
+         <small [hidden]="newAuthorForm.controls.lastName.valid
+                         || (newAuthorForm.controls.lastName && !submitted)" class="text-danger">
+           First Name is required (minimum 5 characters).
+         </small>
         </div>
       </div>
 
-      <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-cell mdl-cell--12-col" >
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-         <input type="text" class="mdl-textfield__input" id="age" name="age" [(ngModel)]="author.age">
+         <input type="text" class="mdl-textfield__input" id="age" name="age"
+           formControlName="age"
+         >
          <label class="mdl-textfield__label" for="age">Age</label>
+         <small [hidden]="newAuthorForm.controls.age.valid
+                         || (newAuthorForm.controls.age && !submitted)" class="text-danger">
+           Age must have 2 characters.
+         </small>
        </div>
       </div>
+    </div>
+
+    <div class="margin-20">
+       <div>newAuthorForm details:-</div>
+       <pre>Is newAuthorForm valid?: <br>{{newAuthorForm.valid | json}}</pre>
+       <pre>Is newAuthorForm submitted?: <br>{{submitted | json}}</pre>
+       <pre>newAuthorForm value: <br>{{newAuthorForm.value | json}}</pre>
     </div>
 
     <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
@@ -31,4 +56,4 @@
 
   </form>
 
-</div>
+<!-- </div> -->
