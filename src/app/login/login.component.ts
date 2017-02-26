@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   templateUrl: './login.component.html'
@@ -17,21 +18,24 @@ export class LoginComponent implements OnInit {
   /**
    * Login a user
    */
-  login() {
+  login(form: NgForm) {
     this.errorMessage = '';
+    console.log(form);
 
-    this.service.login(this.credentials.username, this.credentials.password)
-      .subscribe(
-        data => {
-          if(data.code === 200){
-            this.router.navigate(['/author']);
-          }
-        },
-        err => {
-          this.errorMessage = err;
-          console.error(err);
-        }
-      );
+    if(form.valid){
+        this.service.login(this.credentials.username, this.credentials.password)
+          .subscribe(
+            data => {
+              if(data.code === 200){
+                this.router.navigate(['/author']);
+              }
+            },
+            err => {
+              this.errorMessage = err;
+              console.error(err);
+            }
+          );
+    }
   }
 
 }

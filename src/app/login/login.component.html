@@ -8,18 +8,37 @@
 			</div>
       <div class="mdl-card__supporting-text">
 
-        <form (ngSubmit)="login()">
+        <form #f="ngForm" novalidate (ngSubmit)="login(f)">
 
           <div class="mdl-textfield mdl-js-textfield" style="width:100%">
             <label class="mdl-textfield__label" for="username">Username</label>
             <input class="mdl-textfield__input" type="text"  name="username"
-              [(ngModel)]="credentials.username">
+              [(ngModel)]="credentials.username"
+               #username="ngModel" required minlength="5">
+
+               <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
+                  <span *ngIf="f.controls['username']?.hasError('required')">
+                    Username is required.
+                  </span>
+                  <!-- Both following conditioms are the same  -->
+                  <!-- <span *ngIf="f.controls.username?.hasError('minlength')">  -->
+                  <span *ngIf="username.errors?.minlength">
+                    Username must have at least 5 characters.
+                  </span>
+              </small>
           </div>
 
           <div class="mdl-textfield mdl-js-textfield" style="width:100%">
             <label class="mdl-textfield__label" for="password">Password</label>
             <input class="mdl-textfield__input" type="password" name="password"
-              [(ngModel)]="credentials.password">
+              [(ngModel)]="credentials.password"
+               #password="ngModel" required minlength="5">
+
+              <small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
+                <span *ngIf="f.controls.password?.hasError('required')">
+                    Password is required
+                </span>
+              </small>
           </div>
 
           <!-- messages -->
@@ -31,6 +50,12 @@
           </div>
 
         </form>
+
+        <!-- <div class="margin-20">
+           <div>Form details:-</div>
+           <pre>form value: <br>{{f.value | json}}</pre>
+         </div> -->
+
       </div>
     </div>
     <div class="mdl-layout-spacer"></div>

@@ -30,6 +30,15 @@ export class AuthorService {
   }
 
   /**
+   * Get all author
+   */
+  getMapAuthors(): Observable<Object[]> {
+    return this.http.get(`${this.authorUrl}/getAllMap`)
+      .map(res => res.json().data)
+      .catch(this.handleError);
+  }
+
+  /**
    * Get a single author
    */
   getAuthor(id: number): Observable<Author> {

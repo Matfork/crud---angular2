@@ -1,34 +1,71 @@
 <div *ngIf="book">
 
-  <form (ngSubmit)="updateBook()">
+  <form [formGroup]="updateBookForm" (ngSubmit)="updateBook(updateBookForm)">
 
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield">
            <label class="mdl-textfield__label" for="name">Name</label>
-           <input type="text" class="mdl-textfield__input"  name="name" id="name" [(ngModel)]="book.name">
-         </div>
+           <input type="text" class="mdl-textfield__input"  [ngClass]="{'has-error':!updateBookForm.controls['name'].valid}"
+            name="name" id="name" formControlName="name"
+           >
+        </div>
+        <small>
+          <span *ngIf="updateBookForm.controls['name'].hasError('required') && (!!submitted || updateBookForm.controls['name'].touched)">
+            Name is required.
+          </span>
+          <span *ngIf="updateBookForm.controls['name'].hasError('minlength') && (!!submitted || updateBookForm.controls['name'].touched)">
+            Name must be at least 5 characters long.
+          </span>
+        </small>
+
       </div>
 
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-         <input type="text" class="mdl-textfield__input" name="description" id="description" [(ngModel)]="book.description">
+         <input type="text" class="mdl-textfield__input" name="description" id="description" formControlName="description"
+         >
          <label class="mdl-textfield__label" for="description">Description</label>
         </div>
+        <small>
+          <span  *ngIf="updateBookForm.controls['description'].hasError('required') && (!!submitted || updateBookForm.controls['description'].touched)">
+            Description is required.
+          </span>
+        </small>
       </div>
 
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-         <input type="text" class="mdl-textfield__input" id="publication_date" name="publication_date" [(ngModel)]="book.publication_date">
+         <input type="text" class="mdl-textfield__input" id="publication_date" name="publication_date" formControlName="publication_date"
+          >
          <label class="mdl-textfield__label" for="publication_date">Publication Date</label>
        </div>
+
+       <small>
+         <span *ngIf="updateBookForm.controls['publication_date'].hasError('required') && (!!submitted || updateBookForm.controls['publication_date'].touched)">
+           Date is required.
+         </span>
+         <span *ngIf="updateBookForm.controls['publication_date'].hasError('minlength') && (!!submitted || updateBookForm.controls['publication_date'].touched)">
+           Date must be at least 10 characters long.
+         </span>
+         <span *ngIf="updateBookForm.controls['publication_date'].hasError('maxlength') && (!!submitted || updateBookForm.controls['publication_date'].touched)">
+           Date must be at max 10 characters long.
+         </span>
+       </small>
       </div>
 
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input type="text" class="mdl-textfield__input" id="author_id" name="author_id" [(ngModel)]="book.author_id">
-           <label class="mdl-textfield__label" for="author_id">Author</label>
+          <select id="guild" formControlName="author_id" class="mdl-selectfield">
+            <option *ngFor="let aut of mapAuthors" [value]="aut.id">{{aut.full_name}}</option>
+          </select>
+
          </div>
+         <small>
+           <span *ngIf="updateBookForm.controls['author_id'].hasError('required') && (!!submitted || updateBookForm.controls['author_id'].touched)">
+             Author is required.
+           </span>
+         </small>
       </div>
     </div>
 

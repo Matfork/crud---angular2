@@ -1,6 +1,6 @@
 import { NgModule }       from '@angular/core';
 import { CommonModule }   from '@angular/common';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 
 import { BookRoutingModule } from './book-routing.module';
 import { BookComponent } from './book.component';
@@ -16,6 +16,7 @@ import { AuthorService } from '../shared/services/author.service';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BookRoutingModule
   ],
   declarations: [

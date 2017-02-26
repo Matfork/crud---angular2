@@ -1,34 +1,71 @@
 <div *ngIf="book">
 
-  <form (ngSubmit)="createBook()">
+  <form [formGroup]="newBookForm" (ngSubmit)="createBook(newBookForm)">
 
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield">
            <label class="mdl-textfield__label" for="name">Name</label>
-           <input type="text" class="mdl-textfield__input"  name="name" id="name" [(ngModel)]="book.name">
-         </div>
+           <input type="text" class="mdl-textfield__input"  [ngClass]="{'has-error':!newBookForm.controls['name'].valid}"
+            name="name" id="name" [formControl]="newBookForm.controls['name']"
+           >
+        </div>
+        <small>
+          <span *ngIf="newBookForm.controls['name'].hasError('required') && (!!submitted || newBookForm.controls['name'].touched)">
+            Name is required.
+          </span>
+          <span *ngIf="newBookForm.controls['name'].hasError('minlength') && (!!submitted || newBookForm.controls['name'].touched)">
+            Name must be at least 5 characters long.
+          </span>
+        </small>
+
       </div>
 
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-         <input type="text" class="mdl-textfield__input" name="description" id="description" [(ngModel)]="book.description">
+         <input type="text" class="mdl-textfield__input" name="description" id="description" [formControl]="newBookForm.controls['description']"
+         >
          <label class="mdl-textfield__label" for="description">Description</label>
         </div>
+        <small>
+          <span  *ngIf="newBookForm.controls['description'].hasError('required') && (!!submitted || newBookForm.controls['description'].touched)">
+            Description is required.
+          </span>
+        </small>
       </div>
 
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-         <input type="text" class="mdl-textfield__input" id="publication_date" name="publication_date" [(ngModel)]="book.publication_date">
+         <input type="text" class="mdl-textfield__input" id="publication_date" name="publication_date" [formControl]="newBookForm.controls['publication_date']"
+          >
          <label class="mdl-textfield__label" for="publication_date">Publication Date</label>
        </div>
+
+       <small>
+         <span *ngIf="newBookForm.controls['publication_date'].hasError('required') && (!!submitted || newBookForm.controls['publication_date'].touched)">
+           Date is required.
+         </span>
+         <span *ngIf="newBookForm.controls['publication_date'].hasError('minlength') && (!!submitted || newBookForm.controls['publication_date'].touched)">
+           Date must be at least 10 characters long.
+         </span>
+         <span *ngIf="newBookForm.controls['publication_date'].hasError('maxlength') && (!!submitted || newBookForm.controls['publication_date'].touched)">
+           Date must be at max 10 characters long.
+         </span>
+       </small>
       </div>
 
       <div class="mdl-cell mdl-cell--12-col">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-           <input type="text" class="mdl-textfield__input" id="author_id" name="author_id" [(ngModel)]="book.author_id">
-           <label class="mdl-textfield__label" for="author_id">Author</label>
+          <select id="guild" [formControl]="newBookForm.controls['author_id']" class="mdl-selectfield">
+            <option *ngFor="let aut of mapAuthors" [value]="aut.id">{{aut.full_name}}</option>
+          </select>
+
          </div>
+         <small>
+           <span *ngIf="newBookForm.controls['author_id'].hasError('required') && (!!submitted || newBookForm.controls['author_id'].touched)">
+             Author is required.
+           </span>
+         </small>
       </div>
     </div>
 
